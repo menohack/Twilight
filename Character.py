@@ -139,22 +139,8 @@ class Character(pygame.sprite.Sprite):
         plattemp = temp
         hitplat = False
         #hittop = False
+        
         for p in platforms:
-            #Top of platform collision
-            if p.rect.topleft[1] <= temp[1] + self.image.get_height() and p.rect.topleft[1] >= self.p[1] + self.image.get_height():
-                #y collision, need to check if x's overlap
-                if (p.rect.topleft[0]<= temp[0] + self.image.get_width()- 5 and self.rect.topleft[0] <= p.rect.topleft[0] + p.image.get_width() - 1):
-                    #now we know the x overlaps
-                    plattemp = (plattemp[0], p.rect.topleft[1] - self.image.get_height())
-                    #if(self.jump_delay != 0 or self.AttackState != AttackState.JumpState()):
-                        #self.hittop = True
-                    if self.v[1] > 1000:
-                        self.health = 0
-                    self.v = (self.v[0], 0)
-                    hitplat = True
-                    #print "TOP COLLISION"
-                    self.grounded = 1
-                    #print "top problem"
             #Bottom of platform collision
             if p.rect.topleft[1] + p.image.get_height() >= temp[1] and p.rect.topleft[1] + p.image.get_height() <= self.p[1]:
                 #y collision, need to check if x's overlap
@@ -163,10 +149,7 @@ class Character(pygame.sprite.Sprite):
                     plattemp = (plattemp[0], p.rect.topleft[1] + p.image.get_height() + 1)
                     #if(self.jump_delay != 0 or self.AttackState != AttackState.JumpState()):
                     self.v = (self.v[0],0)
-                    #print "BOTTOM COLLISION"
                     hitplat = True
-                        #self.grounded = 1
-                    #print "bottom problem"
             #Left of platform collision
             if p.rect.topleft[0] <= temp[0] + self.image.get_width() and p.rect.topleft[0] >= self.p[0] + self.image.get_width():
                 #x collision, need to check if y's overlap
@@ -180,7 +163,6 @@ class Character(pygame.sprite.Sprite):
                         self.rightkey = 0
                         self.direction = 'left'
                     hitplat = True
-                    #print "LEFT COLLISION"
             #Right of platform collision
             if p.rect.topleft[0] + p.image.get_width() >= temp[0] and p.rect.topleft[0] + p.image.get_width() <= self.p[0]:
                 #y collision, need to check if x's overlap
@@ -188,13 +170,27 @@ class Character(pygame.sprite.Sprite):
                     #now we know the y overlaps
                     plattemp = (p.rect.topleft[0] + p.image.get_width(), plattemp[1])
                     self.v = (0, self.v[1])
-                    #print "RIGHT COLLISION"
                     if self.player==0:
                         self.v = (-self.v[0], self.v[1])
                         self.rightkey = 1
                         self.leftkey = 0
                         self.direction = 'right'
                     hitplat = True
+            #Top of platform collision
+            if p.rect.topleft[1] <= temp[1] + self.image.get_height() and p.rect.topleft[1] >= self.p[1] + self.image.get_height():
+                #y collision, need to check if x's overlap
+                if (p.rect.topleft[0]<= temp[0] + self.image.get_width() and self.rect.topleft[0] <= p.rect.topleft[0] + p.image.get_width()):
+                    #now we know the x overlaps
+                    plattemp = (plattemp[0], p.rect.topleft[1] - self.image.get_height())
+                    #if(self.jump_delay != 0 or self.AttackState != AttackState.JumpState()):
+                        #self.hittop = True
+                    if self.v[1] > 1000:
+                        self.health = 0
+                    self.v = (self.v[0], 0)
+                    hitplat = True
+                    if self.player == 1:
+                        print "TOP COLLISION"
+                    self.grounded = 1
         #print self.direction
         #for sprite in pygame.sprite.spritecollide(self, platforms, False):
             #if self.player == 1:

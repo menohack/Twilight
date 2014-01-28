@@ -1,2 +1,4 @@
-run the game with the command
+Requires Python 2.7 x86 and pygame 1.9.1 x86
+
+Run the game with the command:
 python twilight.py

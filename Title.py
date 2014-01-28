@@ -16,6 +16,7 @@ class Title(State.State):
         self.fadetime = float(3500)
         Globals.Curtick = 0
         isloading = 1
+        self.isReady = False
     def draw(self):
         Globals.Screen.blit(self.background, (0,0))
         #print Globals.Curtick
@@ -39,8 +40,9 @@ class Title(State.State):
         if Globals.Cutscenes == None:
             self.isloading = 1
             return
-        else:
+        elif Globals.Curtick >= 5000 or self.isReady:
             self.isloading = 0
+            Globals.State = Menu.Menu()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,5 +50,5 @@ class Title(State.State):
             elif event.type == pygame.KEYDOWN:
 	        if event.key == pygame.K_ESCAPE:
 	            Globals.Running = False
-                elif event.key == pygame.K_RETURN:
-                    Globals.State = Menu.Menu()
+	        if event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
+                    self.isReady = True
