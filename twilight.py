@@ -29,7 +29,7 @@ def init():
 
     Globals.xRes = 640
     Globals.yRes = 480
-    Globals.Screen = pygame.display.set_mode((Globals.xRes,Globals.yRes),pygame.FULLSCREEN)
+    Globals.Screen = pygame.display.set_mode((Globals.xRes,Globals.yRes), pygame.FULLSCREEN)
     #Globals.Screen = pygame.display.set_mode((Globals.xRes,Globals.yRes))
 
     pygame.mouse.set_visible(False)

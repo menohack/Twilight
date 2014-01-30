@@ -188,8 +188,8 @@ class Character(pygame.sprite.Sprite):
                         self.health = 0
                     self.v = (self.v[0], 0)
                     hitplat = True
-                    if self.player == 1:
-                        print "TOP COLLISION"
+                    #if self.player == 1:
+                    #    print "TOP COLLISION"
                     self.grounded = 1
         #print self.direction
         #for sprite in pygame.sprite.spritecollide(self, platforms, False):

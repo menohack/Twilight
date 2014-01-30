@@ -5,10 +5,11 @@ import Globals
 import Game
 import State
 import Victory
+import Menu
 
-class Cutscene1(State.State):
+class Cutscene(State.State):
 
-    def __init__(self):
+    def init(self):
         self.elapsed = 0   #the elapsed time since frame was changed
         self.FRAMES = []
         self.FRAMES.append(pygame.image.load("Images/Cutscene1/1small.png").convert())
@@ -26,7 +27,7 @@ class Cutscene1(State.State):
         self.frametime = self.frametimes[0]
         self.numframes = 4
         Globals.Elapsed = 0
-        Globals.Curtick = 0
+        Globals.Curtick = pygame.time.get_ticks()
         Globals.Lasttick = 0
         self.fadetime = float(1000)
         self.backgroundTrack = pygame.mixer.Sound("Sounds/EdwardsCurse.ogg")
@@ -63,6 +64,22 @@ class Cutscene1(State.State):
                 self.image = self.FRAMES[self.framecounter]
                 self.frametime = self.frametimes[self.framecounter]
 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                Globals.Running = False
+            elif event.type == pygame.KEYDOWN:
+    	        if event.key == pygame.K_ESCAPE:
+    	            Globals.State = Menu.Menu()
+                    self.backgroundTrack.stop()
+                elif event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
+                    Globals.State = self.nextLevel
+                    self.backgroundTrack.stop()
+
+class Cutscene1(Cutscene):
+    def __init__(self):
+        self.init()
+        self.nextLevel = Game.Level1()
+
 class Cutscene2(State.State):
 
     def __init__(self):
@@ -83,7 +100,7 @@ class Cutscene2(State.State):
         self.frametime = self.frametimes[0]
         self.numframes = 4
         Globals.Elapsed = 0
-        Globals.Curtick = 0
+        Globals.Curtick = pygame.time.get_ticks()
         Globals.Lasttick = 0
         self.fadetime = float(1000)
         self.backgroundTrack = pygame.mixer.Sound("Sounds/EdwardsCurse.ogg")
@@ -149,7 +166,7 @@ class Cutscene3(State.State):
         self.framecounter = 0
         self.frametime = self.frametimes[0]
         Globals.Elapsed = 0
-        Globals.Curtick = 0
+        Globals.Curtick = pygame.time.get_ticks()
         Globals.Lasttick = 0
         self.fadetime = float(1000)
         self.backgroundTrack = pygame.mixer.Sound("Sounds/EdwardsCurse.ogg")
@@ -207,7 +224,7 @@ class Cutscene4(State.State):
         self.frametime = self.frametimes[0]
         self.numframes = 5
         Globals.Elapsed = 0
-        Globals.Curtick = 0
+        Globals.Curtick = pygame.time.get_ticks()
         Globals.Lasttick = 0
         self.fadetime = float(1000)
         self.backgroundTrack = pygame.mixer.Sound("Sounds/EdwardsCurse.ogg")
@@ -271,7 +288,7 @@ class Cutscene5(State.State):
         self.frametime = self.frametimes[0]
         self.numframes = 8
         Globals.Elapsed = 0
-        Globals.Curtick = 0
+        Globals.Curtick = pygame.time.get_ticks()
         Globals.Lasttick = 0
         self.fadetime = float(1000)
         self.backgroundTrack = pygame.mixer.Sound("Sounds/EdwardsCurse.ogg")

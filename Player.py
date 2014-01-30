@@ -28,7 +28,7 @@ class Player(Character):
         if not Player.EAT_BAMBI_3:
             Player.EAT_BAMBI_3 = pygame.image.load("Images/ed-eatbambi3_shrunk.png").convert_alpha()
         if not Character.EDSTILL:
-            Character.EDSTILL = pygame.image.load("Images/ed-still-transparent.png").convert_alpha()
+            Character.EDSTILL = pygame.image.load("Images/ed-still_normalized2.png").convert_alpha()
 
         self.BAMBI_FRAMES = []
         #RIGHT THEN LEFT
